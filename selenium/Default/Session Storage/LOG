@@ -1,0 +1,17 @@
+2024/05/20-20:41:00.915 2c03 Reusing MANIFEST /Users/jakeschinasi/Documents/repo/Airline/selenium/Default/Session Storage/MANIFEST-000001
+2024/05/20-20:41:00.916 2c03 Recovering log #80
+2024/05/20-20:41:00.925 2c03 Level-0 table #83: started
+2024/05/20-20:41:00.960 2c03 Level-0 table #83: 5491172 bytes OK
+2024/05/20-20:41:00.961 2c03 Recovering log #82
+2024/05/20-20:41:00.961 2c03 Reusing old log /Users/jakeschinasi/Documents/repo/Airline/selenium/Default/Session Storage/000082.log 
+2024/05/20-20:41:00.970 2c03 Delete type=0 #80
+2024/05/20-20:41:00.971 3903 Compacting 4@0 + 1@1 files
+2024/05/20-20:41:01.011 3903 Generated table #84@0: 1 keys, 5396893 bytes
+2024/05/20-20:41:01.017 3903 Generated table #85@0: 9 keys, 49532 bytes
+2024/05/20-20:41:01.017 3903 Compacted 4@0 + 1@1 files => 5446425 bytes
+2024/05/20-20:41:01.026 3903 compacted to: files[ 0 2 0 0 0 0 0 ]
+2024/05/20-20:41:01.027 3903 Delete type=2 #77
+2024/05/20-20:41:01.027 3903 Delete type=2 #74
+2024/05/20-20:41:01.027 3903 Delete type=2 #81
+2024/05/20-20:41:01.027 3903 Delete type=2 #83
+2024/05/20-20:41:01.027 3903 Delete type=2 #79

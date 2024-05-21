@@ -4,11 +4,9 @@ from threading import Timer
 from datetime import datetime, timedelta
 import time
 import splinter as sp
+from splinter import Browser
 
-# Do not modify anything above this line
-###############################################################################
 # Enter personal info here!
-
 confirmation_number = 'ABC123'
 first_name = 'PAUL'
 last_name = 'LISKER'
@@ -18,17 +16,12 @@ departure_year = 2016   # 4 digits
 departure_hour = 18     # 24 hour format
 departure_minute = 50
 
-###############################################################################
-# Do not modify anything below this line
-
 spin_cursor = False
-
 
 def spinning_cursor():
     while True:
         for cursor in '|/-\\':
             yield cursor
-
 
 spinner = spinning_cursor()
 for _ in range(50):
@@ -37,20 +30,18 @@ for _ in range(50):
     time.sleep(0.1)
     sys.stdout.write('\b')
 
-
 def checkin(browser):
     spin_cursor = False
     time.sleep(3)  # To make sure that their server allows for checking in.
     checkin_button = browser.find_by_id('form-mixin--submit-button')
     checkin_button.click()
     time.sleep(3)
-    print_documents_button = browser.find_by_css('button')[7]
+    print_documents_button = browser.find_by_xpath("//button[contains(text(), 'Print Documents')]")
     print_documents_button.click()
     print('Checked in at', datetime.now())
     print("")
     quit(browser)
     return
-
 
 def get_input():
     get_user_input = input
@@ -61,60 +52,32 @@ def get_input():
 
     return get_user_input()
 
-
 def quit(browser):
     print("When you're finished, click enter to close the browser session.")
     get_input()
     browser.quit()
 
-
-def now(confirmation_number, first_name, last_name):
-    # Hard coded date of January 1, 2000 at midnight to ensure past date
-    return main(confirmation_number, first_name, last_name, 1, 1, 2000, 0, 0)
-
-
 def main(confirmation_number, first_name, last_name, departure_day,
          departure_month, departure_year, departure_hour, departure_minute):
-    browser = sp.Browser('chrome')
-    browser.visit('https://www.southwest.com/air/check-in/index.html')
-    browser.find_by_id('confirmationNumber').fill(confirmation_number)
-    browser.find_by_id('passengerFirstName').fill(first_name)
-    browser.find_by_id('passengerLastName').fill(last_name)
+    webdriver_path = '/Users/jakeschinasi/Downloads/chromedriver_mac64'
+    browser = sp.Browser('chrome', executable_path=webdriver_path)
+    browser.visit('https://checkin.jetblue.com/checkin')
+    
+    # Find the confirmation code input field using CSS attribute selector
+    confirmation_input = browser.find_by_css('input[name="confirmationCode"]')
+    # Clear the input field before filling it (optional)
+    confirmation_input.first.fill('')
+    # Fill the confirmation code input field
+    confirmation_input.first.fill(confirmation_number)
+    
+    # Find the last name input field using CSS attribute selector
+    last_name_input = browser.find_by_css('input[name="lastName"]')
+    # Clear the input field before filling it (optional)
+    last_name_input.first.fill('')
+    # Fill the last name input field
+    last_name_input.first.fill(last_name)
 
-    departure = datetime(departure_year,
-                         departure_month,
-                         departure_day,
-                         departure_hour,
-                         departure_minute, 1)
-    checkin_time = departure - timedelta(days=1)
-    now = datetime.now()
-    delta_t = checkin_time - now
-    secs = delta_t.seconds + 10  # Grace period of 10 sec to ensure check-in
-
-    print('Now:', now)
-    print('Check-In Time:', checkin_time)
-
-    if (secs < 0) or (now > checkin_time):
-        checkin(browser)
-    else:
-        days, hours, minutes, seconds = delta_t.days, delta_t.seconds // 3600, delta_t.seconds // 60 % 60, delta_t.seconds % 60
-        if days > 0:
-            print('Waiting', days, 'days,', hours, 'hours,', minutes,
-                  'minutes, and', seconds, 'seconds before checking in...')
-        elif hours > 0:
-            print('Waiting', hours, 'hours,', minutes, 'minutes, and',
-                  seconds, 'seconds before checking in...')
-        elif minutes > 0:
-            print('Waiting', minutes, 'minutes and',
-                  seconds, 'seconds before checking in...')
-        else:
-            print('Waiting', seconds, 'seconds before checking in...')
-
-        timer = Timer(secs, checkin, [browser])
-        timer.start()
-
-    return browser
-
+    # Rest of your code...
 
 if __name__ == "__main__":
     # Support Python 2 and 3 input
