@@ -1,3 +1,6 @@
 2024/05/20-20:41:00.792 2c03 Reusing MANIFEST /Users/jakeschinasi/Documents/repo/Airline/selenium/Default/Local Storage/leveldb/MANIFEST-000001
 2024/05/20-20:41:00.793 2c03 Recovering log #26
 2024/05/20-20:41:00.794 2c03 Reusing old log /Users/jakeschinasi/Documents/repo/Airline/selenium/Default/Local Storage/leveldb/000026.log 
+2024/05/20-21:02:40.227 3903 Level-0 table #30: started
+2024/05/20-21:02:40.240 3903 Level-0 table #30: 19368 bytes OK
+2024/05/20-21:02:40.257 3903 Delete type=0 #26
